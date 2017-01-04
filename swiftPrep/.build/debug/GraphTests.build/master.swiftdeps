@@ -1,5 +1,0 @@
-version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
-options: "aeceb8ca6567e67a483b41774557f348"
-build_time: [536720836, 448363000]
-inputs:
-  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/GraphTests/GraphTests.swift": [536720774, 0]

@@ -1,5 +1,0 @@
-version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
-options: "30c5b93ec970a0c1755dfdb0f8594d51"
-build_time: [536786527, 41996000]
-inputs:
-  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/LinkedLists/CircularlyLinkedLists.swift": [536786522, 0]

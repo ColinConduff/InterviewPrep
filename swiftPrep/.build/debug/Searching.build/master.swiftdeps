@@ -1,5 +1,0 @@
-version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
-options: "7cfd02d1e164fc99863a85d20b45ef14"
-build_time: [536722087, 160358000]
-inputs:
-  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Searching/BinarySearch.swift": [536722081, 0]
