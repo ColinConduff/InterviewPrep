@@ -1,0 +1,5 @@
+version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
+options: "e58d3cf01128e36f30d7f8d5f02bddf4"
+build_time: [536722135, 547137000]
+inputs:
+  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/SearchingTests/SearchingTests.swift": [536722127, 0]

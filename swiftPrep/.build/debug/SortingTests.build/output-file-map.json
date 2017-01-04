@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/master.swiftdeps"
+  },
+  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/SortingTests/SortingTests.swift": {
+    "dependencies": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.d",
+    "object": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.swift.o",
+    "swiftmodule": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.swiftdeps"
+  }
+}

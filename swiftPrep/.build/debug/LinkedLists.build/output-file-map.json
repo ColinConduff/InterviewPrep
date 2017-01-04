@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/master.swiftdeps"
+  },
+  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/LinkedLists/CircularlyLinkedLists.swift": {
+    "dependencies": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.d",
+    "object": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.swift.o",
+    "swiftmodule": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists~partial.swiftmodule",
+    "swift-dependencies": "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.swiftdeps"
+  }
+}

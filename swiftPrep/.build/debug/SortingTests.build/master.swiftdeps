@@ -1,0 +1,5 @@
+version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
+options: "adb93d19b09b14686d788512970c364f"
+build_time: [536693116, 904855000]
+inputs:
+  "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/SortingTests/SortingTests.swift": [536601301, 0]

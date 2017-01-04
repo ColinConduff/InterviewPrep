@@ -1,0 +1,175 @@
+client:
+  name: swift-build
+tools: {}
+targets:
+  "test": ["<Graph.module>","<LinkedLists.module>","<Searching.module>","<Sorting.module>","<Tree.module>","<GraphTests.module>","<LinkedListsTests.module>","<SearchingTests.module>","<SortingTests.module>","<TreeTests.module>","<InterviewPrepPackageTests.test>"]
+  "main": ["<Graph.module>","<LinkedLists.module>","<Searching.module>","<Sorting.module>","<Tree.module>"]
+default: "main"
+commands: 
+  "<Graph.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "Graph"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.swiftmodule"
+    inputs: []
+    outputs: ["<Graph.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/BreadthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/DepthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Dijkstra.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Graph.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Heap.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Prim.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/BreadthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/DepthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Dijkstra.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Graph.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Heap.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Prim.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Graph/BreadthFirstSearch.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Graph/DepthFirstSearch.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Graph/Dijkstra.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Graph/Graph.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Graph/Heap.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Graph/Prim.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<LinkedLists.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "LinkedLists"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.swiftmodule"
+    inputs: []
+    outputs: ["<LinkedLists.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/LinkedLists/CircularlyLinkedLists.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<Searching.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "Searching"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Searching.swiftmodule"
+    inputs: []
+    outputs: ["<Searching.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Searching.build/BinarySearch.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Searching.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Searching.build/BinarySearch.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Searching/BinarySearch.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<Sorting.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "Sorting"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.swiftmodule"
+    inputs: []
+    outputs: ["<Sorting.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/BubbleSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/CountingSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/InsertionSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/MergeSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/QuickSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/SelectionSort.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/BubbleSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/CountingSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/InsertionSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/MergeSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/QuickSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/SelectionSort.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Sorting/BubbleSort.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Sorting/CountingSort.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Sorting/InsertionSort.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Sorting/MergeSort.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Sorting/QuickSort.swift","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Sorting/SelectionSort.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<Tree.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "Tree"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Tree.swiftmodule"
+    inputs: []
+    outputs: ["<Tree.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Tree.build/BinarySearchTree.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Tree.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Tree.build/BinarySearchTree.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Sources/Tree/BinarySearchTree.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<GraphTests.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "GraphTests"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/GraphTests.swiftmodule"
+    inputs: ["<Graph.module>"]
+    outputs: ["<GraphTests.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/GraphTests.build/GraphTests.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/GraphTests.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/GraphTests.build/GraphTests.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/GraphTests/GraphTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<LinkedListsTests.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "LinkedListsTests"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedListsTests.swiftmodule"
+    inputs: ["<LinkedLists.module>"]
+    outputs: ["<LinkedListsTests.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedListsTests.build/LinkedListsTests.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedListsTests.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedListsTests.build/LinkedListsTests.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/LinkedListsTests/LinkedListsTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<SearchingTests.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "SearchingTests"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SearchingTests.swiftmodule"
+    inputs: ["<Searching.module>"]
+    outputs: ["<SearchingTests.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SearchingTests.build/SearchingTests.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SearchingTests.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SearchingTests.build/SearchingTests.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/SearchingTests/SearchingTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<SortingTests.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "SortingTests"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.swiftmodule"
+    inputs: ["<Sorting.module>"]
+    outputs: ["<SortingTests.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/SortingTests/SortingTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<TreeTests.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "TreeTests"
+    module-output-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/TreeTests.swiftmodule"
+    inputs: ["<Tree.module>"]
+    outputs: ["<TreeTests.module>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/TreeTests.build/TreeTests.swift.o"]
+    import-paths: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug"]
+    temps-path: "/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/TreeTests.build"
+    objects: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/TreeTests.build/TreeTests.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/ModuleCache"]
+    sources: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/Tests/TreeTests/TreeTests.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<InterviewPrepPackageTests.test>":
+    tool: shell
+    description: "Linking ./.build/debug/InterviewPrepPackageTests.xctest/Contents/MacOS/InterviewPrepPackageTests"
+    inputs: ["/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/GraphTests.build/GraphTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/BreadthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/DepthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Dijkstra.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Graph.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Heap.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Prim.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedListsTests.build/LinkedListsTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SearchingTests.build/SearchingTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Searching.build/BinarySearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/BubbleSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/CountingSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/InsertionSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/MergeSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/QuickSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/SelectionSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/TreeTests.build/TreeTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Tree.build/BinarySearchTree.swift.o"]
+    outputs: ["<InterviewPrepPackageTests.test>","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/InterviewPrepPackageTests.xctest/Contents/MacOS/InterviewPrepPackageTests"]
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-g","-L/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug","-o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/InterviewPrepPackageTests.xctest/Contents/MacOS/InterviewPrepPackageTests","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-module-name","InterviewPrepPackageTests","-Xlinker","-bundle","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/GraphTests.build/GraphTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/BreadthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/DepthFirstSearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Dijkstra.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Graph.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Heap.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Graph.build/Prim.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedListsTests.build/LinkedListsTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/LinkedLists.build/CircularlyLinkedLists.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SearchingTests.build/SearchingTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Searching.build/BinarySearch.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/SortingTests.build/SortingTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/BubbleSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/CountingSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/InsertionSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/MergeSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/QuickSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Sorting.build/SelectionSort.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/TreeTests.build/TreeTests.swift.o","/Users/colinconduff/InterviewPrep/solutions/swift-solutions/.build/debug/Tree.build/BinarySearchTree.swift.o"]
+
