@@ -12,6 +12,8 @@ class Graph {
 		self.graphType = type
 
 		for (vertex, values) in edges {
+			self.add(vertex: vertex)
+			
 			for (neighbor, weight) in values {
 				self.addEdge(from: vertex, to: neighbor, edgeWeight: weight)
 			}
@@ -24,7 +26,7 @@ class Graph {
 
 	func add(vertex: String) {
 		if self.neighbors[vertex] == nil {
-			self.neighbors[vertex] = [String: Int]() // unnecessary?
+			self.neighbors[vertex] = [String: Int]()
 		}
 	}
 

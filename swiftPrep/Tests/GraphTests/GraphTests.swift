@@ -111,4 +111,25 @@ class GraphTests: XCTestCase {
 
     XCTAssertTrue(mst == solution)
   }
+
+  func testTopoSort() {
+    let dagEdges = [
+      "G": ["H": 0],
+      "A": ["H": 0, "B": 0],
+      "B": ["C": 0],
+      "C": ["F": 0],
+      "D": ["C": 0, "E": 0],
+      "E": ["F": 0],
+      "I": [:]
+    ]
+
+    // topo sorts are not unique/ multiple solutions possible
+    let solution = ["I", "G", "E", "D", "F", "C", "B", "H", "A"]
+
+    let g = Graph(type: .directed, edges: dagEdges)
+
+    let topoSort = topologicalSort(graph: g)!
+
+    XCTAssertTrue(topoSort == solution)
+  }
 }
