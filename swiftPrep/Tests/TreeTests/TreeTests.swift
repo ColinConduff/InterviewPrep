@@ -32,4 +32,22 @@ class TreeTests: XCTestCase {
     XCTAssertTrue(bst.contains(key: 2))
     XCTAssertFalse(bst.contains(key: 1))
   }
+
+  func testTrie() {
+    var trie = Trie()
+
+    let words = ["This", "This is", "This is a test"]
+
+    for word in words {
+        trie.add(word: word)
+    }
+
+    for word in words {
+        XCTAssertTrue(trie.contains(word: word))
+    }
+
+    XCTAssertFalse(trie.contains(word: "False"))
+
+    XCTAssertEqual(Set(words), Set(trie.wordsStartingWith(prefix: "")))
+  }
 }
