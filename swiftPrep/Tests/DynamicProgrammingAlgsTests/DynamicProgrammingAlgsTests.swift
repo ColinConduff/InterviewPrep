@@ -33,4 +33,22 @@ class DynammicProgrammingAlgsTests: XCTestCase {
     //print("\n\nresult: \(result4)\n\n")
     XCTAssertTrue(solution4 == result4)
   }
+
+  func testFibSequence() {
+    let solution = [nil, 0, 1, 1, 2, 3, 5, 8] // extra element at 0th index
+
+    // test without using precomputed sequence
+
+    for n in 0..<solution.endIndex {
+        var precomputed = [Int]()
+        XCTAssertTrue(fibNum(n: n, precomputed: &precomputed)  == solution[n])
+    }
+
+    // test with precomputed sequence
+    var precomputed = [0, 1]
+
+    for n in 0..<solution.endIndex {
+        XCTAssertTrue(fibNum(n: n, precomputed: &precomputed)  == solution[n])
+    }
+  }
 }
