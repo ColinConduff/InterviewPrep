@@ -34,7 +34,8 @@ func longestCommonSubstring(string1: String, string2: String) -> String {
 					longestSubstringLength = currentSubstringLength
 
 					// Time Complexity ??? Amortized O(1)
-					longestSubstring = Array(char1Array.prefix(upTo: rowIndex).suffix(from: rowIndex - longestSubstringLength))
+					let startIndex = rowIndex - longestSubstringLength
+					longestSubstring = Array(char1Array[startIndex..<rowIndex])
 				
 				} else if currentSubstringLength == longestSubstringLength {
 					longestSubstring.append(char1)
