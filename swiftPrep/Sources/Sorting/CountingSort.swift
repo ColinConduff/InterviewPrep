@@ -10,14 +10,14 @@ func countingSort(sequence: inout [Int]) {
 		frequencies[number - minNumber] += 1
 	}
 
-	var index = 0
+	var index = (0..<sequence.endIndex).makeIterator()
 
 	for number in minNumber..<maxNumber {
 		let frequency = frequencies[number - minNumber]
 
 		for _ in 0..<frequency {
+			guard let index = index.next() else { break }
 			sequence[index] = number
-			index += 1
 		}
 	}
 }
