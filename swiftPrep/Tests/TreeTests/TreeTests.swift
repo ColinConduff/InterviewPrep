@@ -50,4 +50,24 @@ class TreeTests: XCTestCase {
 
     XCTAssertEqual(Set(words), Set(trie.wordsStartingWith(prefix: "")))
   }
+
+  func testHeap() {
+    var sequence = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    var solution = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+    heapify(&sequence)
+
+    while let item = heappop(&sequence), let expected = solution.popLast() {
+        XCTAssertEqual(item, expected)
+    }
+
+    let sequenceToPush = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    let uniqueSolution = [1, 2, 6, 5, 3, 10, 7, 10, 8, 9, 4]
+    
+    for num in sequenceToPush {
+        heappush(&sequence, item: num)
+    }
+
+    XCTAssertEqual(sequence, uniqueSolution)
+  }
 }

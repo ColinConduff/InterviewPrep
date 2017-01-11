@@ -2,6 +2,8 @@
 //  Heap.swift
 //  Written for the Swift Algorithm Club by Kevin Randrup and Matthijs Hollemans
 //
+// Used by Dijkstra.swift and Prim.swift as a priority queue
+//
 
 public struct Heap<T> {
   /** The array that stores the heap's nodes. */

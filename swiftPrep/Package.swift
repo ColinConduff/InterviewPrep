@@ -1,5 +1,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "InterviewPrep"
+    name: "InterviewPrep",
+    targets: [
+    	Target(name: "SwiftBridge", dependencies:["ObjCModule", "CModule", "CppModule"])
+    ]
 )
