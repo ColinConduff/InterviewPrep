@@ -6,6 +6,7 @@
 #include "include/arrayList.h"
 
 ArrayList *create_array() {
+
     const int initial_container_size = 16;
 
     ArrayList *array = (ArrayList *) malloc(sizeof(ArrayList));
@@ -31,14 +32,15 @@ void delete_array(ArrayList *array) {
     }
 }
 
-int array_length(ArrayList *array) {
-    return array->length;
+const int array_length(ArrayList *array) {
+    return (array == NULL) ? 0 : array->length;
 }
 
 static void expand(ArrayList *array) {
     int *data;
-    unsigned int new_container_size = array->container_size * 2;
+    unsigned int new_container_size;
 
+    new_container_size = array->container_size * 2;
     data = realloc(array->data, sizeof(int) * new_container_size);
 
     if(data != NULL) {
@@ -49,8 +51,9 @@ static void expand(ArrayList *array) {
 
 static void contract(ArrayList *array) {
     int *data;
-    unsigned int new_container_size = array->container_size / 2;
+    unsigned int new_container_size;
 
+    new_container_size = array->container_size / 2;
     data = realloc(array->data, sizeof(int) * new_container_size);
 
     if(data != NULL) {

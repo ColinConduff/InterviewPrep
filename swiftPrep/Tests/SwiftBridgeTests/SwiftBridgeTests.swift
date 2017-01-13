@@ -27,4 +27,37 @@ class SwiftBridgeTests: XCTestCase {
 
     XCTAssertTrue(array.count == 1)
   }
+
+  func testCCircularBuffer() {
+    
+    let ccb = CCircularBuffer()
+    let test1 = Array(1...16)
+    
+    for num in test1 {
+      ccb.enqueue(num)
+    }
+    
+    ccb.print()
+    XCTAssertTrue(ccb.count == 16)
+    
+    for num in test1 {
+      XCTAssertTrue(num == ccb.dequeue())
+    }
+    
+    ccb.print()
+    XCTAssertTrue(ccb.count == 0)
+
+    let test2 = Array(1...8)
+    
+    for num in test2 {
+      ccb.enqueue(num)
+    }
+
+    XCTAssertTrue(ccb.count == 8)
+
+    XCTAssertTrue(1 == ccb.dequeue())
+    XCTAssertTrue(2 == ccb.dequeue())
+
+    XCTAssertTrue(ccb.count == 6)
+  }
 }
