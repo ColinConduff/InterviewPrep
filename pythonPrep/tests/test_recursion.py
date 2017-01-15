@@ -47,5 +47,8 @@ class RecursionTestCase(unittest.TestCase):
 			self.assertTrue(naive_fib(i+1) == n)
 			self.assertTrue(dyn_fib(i+1) == n)
 
+	def test_subsets(self):
+		self.assertTrue(subsets("abc") == {'', 'ac', 'b', 'c', 'abc', 'ab', 'bc', 'a'})
+
 if __name__ == '__main__':
     unittests.main()

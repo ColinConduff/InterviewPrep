@@ -109,5 +109,17 @@ def dyn_fib(n, i=1, next=1, current=1):
 
 	return dyn_fib(n, i+1, next+current, next)
 
+def _subsets(remaining, subset, output):
+	""" Time: O(2^n) """
+	if len(remaining) == 0:
+		output.add(subset)
+	else:
+		_subsets(remaining[1:], subset + remaining[0], output)
+		_subsets(remaining[1:], subset, output)
+
+def subsets(string):
+	output = set()
+	_subsets(string, "", output)
+	return output
 
 # if __name__ == '__main__':
