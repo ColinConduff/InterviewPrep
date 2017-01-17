@@ -29,7 +29,6 @@ class DynamicAlgsTestCase(unittest.TestCase):
 		for test_case in test_cases:
 			observed = longest_common_subsequence(test_case[0], test_case[1])
 			expected = test_case[2]
-			print("observed: {}, expected: {}".format(observed, expected))
 			self.assertTrue(observed == expected)
 
 if __name__ == '__main__':
