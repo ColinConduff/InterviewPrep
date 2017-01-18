@@ -2,6 +2,7 @@
 
 import unittest
 from sources.graph.graph import *
+from sources.graph.dijkstra import dijkstra
 
 class GraphTestCase(unittest.TestCase):
 
@@ -104,6 +105,28 @@ class GraphTestCase(unittest.TestCase):
 		components = dg.connected_components()
 		for component in components:
 			self.assertTrue(component in [comp1, comp2])
+
+	def test_dijkstra(self):
+		dg = Graph(GraphType.DIRECTED)
+
+		dijkstra_edges = [
+			("S", "U", 10),
+			("S", "X", 5),
+			("U", "V", 1),
+			("V", "Y", 4),
+			("X", "U", 3),
+			("X", "V", 9),
+			("X", "Y", 2),
+			("Y", "S", 7)
+		]
+
+		for vertex, neighbor, edge_weight in dijkstra_edges:
+			dg.insert_edge(vertex, neighbor, edge_weight)
+
+		observed_distances, _ = dijkstra(dg, "S")
+		expected_distances = {"U": 8, "Y": 7, "X": 5, "S": 0, "V": 9}
+
+		self.assertTrue(observed_distances == expected_distances)
 
 
 if __name__ == '__main__':
