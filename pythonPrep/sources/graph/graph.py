@@ -78,3 +78,63 @@ class Graph(object):
 			del self._neighbors[vertex]
 			self._vertex_count -= 1
 
+	def cycle_found(self, source):
+		""" 
+		Use iterative DFS to detect cycles. 
+		Time: O(|V| + |E|)
+		Space: O(|V|)
+		"""
+		stack = [source]
+		visited = set([source])
+		
+		while len(stack) > 0:
+			vertex = stack.pop()
+
+			for neighbor in self._neighbors[vertex]:
+				if neighbor in visited:
+					return True
+
+				visited.add(neighbor)
+				stack.append(neighbor)
+
+		return False
+
+	def connected_components(self):
+		"""
+		Return the graph's connected components.
+
+		Time: O(|V| + |E|) 
+		Space: O(|V|)
+
+		Returns:
+			list of components (sets of vertices)
+		"""
+
+		### Todo: Implement for directed graphs
+		if self._graph_type == GraphType.DIRECTED:
+			raise Exception("Currently only works for undirected graphs")
+
+		components = []
+		unvisited = set(self._neighbors)
+		
+		while len(unvisited) > 0:
+			initial_vertex = next(iter(unvisited))
+			unvisited.remove(initial_vertex)
+			stack = [initial_vertex]
+			component = set(initial_vertex)
+
+			# Iterative DFS
+			while len(stack) > 0:
+				vertex = stack.pop()
+				
+				for neighbor in self._neighbors[vertex]:
+					if neighbor in unvisited:
+						stack.append(neighbor)
+						unvisited.remove(neighbor)
+						component.add(neighbor)
+			
+			components.append(component)
+
+		return components
+
+
