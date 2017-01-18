@@ -110,15 +110,17 @@ class Graph(object):
 			list of components (sets of vertices)
 		"""
 
-		### Todo: Implement for directed graphs
-		if self._graph_type == GraphType.DIRECTED:
-			raise Exception("Currently only works for undirected graphs")
-
 		components = []
-		unvisited = set(self._neighbors)
+
+		if self._graph_type == GraphType.DIRECTED:
+			# Consider using a union-find / disjoint-set instead
+			unvisited = self.vertices_with_in_degree_0()
+		else:
+			unvisited = set(self._neighbors)
 		
 		while len(unvisited) > 0:
 			initial_vertex = next(iter(unvisited))
+
 			unvisited.remove(initial_vertex)
 			stack = [initial_vertex]
 			component = set(initial_vertex)
@@ -128,13 +130,27 @@ class Graph(object):
 				vertex = stack.pop()
 				
 				for neighbor in self._neighbors[vertex]:
-					if neighbor in unvisited:
+					if neighbor not in component:
 						stack.append(neighbor)
-						unvisited.remove(neighbor)
 						component.add(neighbor)
+
+						if neighbor in unvisited:
+							unvisited.remove(neighbor)
 			
 			components.append(component)
 
 		return components
+
+	def vertices_with_in_degree_0(self):
+		""" O(|V| + |E|) """
+		in_degree_0 = set(self._neighbors)
+
+		for vertex in self._neighbors:
+			for neighbor in self._neighbors[vertex]:
+				if neighbor in in_degree_0:
+					in_degree_0.remove(neighbor)
+
+		return in_degree_0
+
 
 

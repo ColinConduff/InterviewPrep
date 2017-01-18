@@ -61,23 +61,47 @@ class GraphTestCase(unittest.TestCase):
 
 		self.assertFalse(acyclic.cycle_found("A"))
 
+	def test_vertices_with_in_degree_0(self):
+		dg = Graph(GraphType.DIRECTED)
+		dg.insert_edge("A", "B")
+		dg.insert_edge("D", "C")
+		dg.insert_vertex("E")
+
+		expected = set(["A", "D", "E"])
+		observed = dg.vertices_with_in_degree_0()
+
+		self.assertTrue(expected == observed)
+
 	def test_connected_components(self):
-		g = Graph(GraphType.UNDIRECTED)
+		ug = Graph(GraphType.UNDIRECTED)
+		dg = Graph(GraphType.DIRECTED)
 
 		# Component 1
-		g.insert_edge("A", "B")
-		g.insert_edge("B", "C")
+		ug.insert_edge("A", "B")
+		ug.insert_edge("B", "C")
+
+		dg.insert_edge("A", "B")
+		dg.insert_edge("B", "C")
+
 		comp1 = set(["A", "B", "C"])
 
-		components = g.connected_components()
-		self.assertTrue(components == [comp1])
+		self.assertTrue(ug.connected_components() == [comp1])
+		self.assertTrue(dg.connected_components() == [comp1])
 
 		# Component 2
-		g.insert_edge("D", "E")
-		g.insert_edge("D", "F")
+		ug.insert_edge("D", "E")
+		ug.insert_edge("D", "F")
+
+		dg.insert_edge("D", "E")
+		dg.insert_edge("D", "F")
+
 		comp2 = set(["D", "E", "F"])
 
-		components = g.connected_components()
+		components = ug.connected_components()
+		for component in components:
+			self.assertTrue(component in [comp1, comp2])
+
+		components = dg.connected_components()
 		for component in components:
 			self.assertTrue(component in [comp1, comp2])
 
