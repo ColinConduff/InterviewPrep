@@ -134,6 +134,22 @@ class GraphTestCase(unittest.TestCase):
 
 		self.assertTrue(all(comp in expected for comp in observed))
 
+		ug.insert_edge("F", "C")
+		expected = [comp1, comp2, comp3]
+		observed = ug.strongly_connected_components()
+
+		self.assertTrue(all(comp in expected for comp in observed))
+
+		# The following case fails because the reverse dfs order
+		# can start in component 3 and flow into component 2.
+		ug.insert_edge("G", "H")
+		ug.insert_edge("H", "F")
+		ug.insert_edge("F", "G")
+		comp3 = {"F", "G", "H"}
+		expected = [comp1, comp2, comp3]
+		observed = ug.strongly_connected_components()
+		self.assertTrue(all(comp in expected for comp in observed))
+
 	def test_dijkstra(self):
 		dg = Graph(GraphType.DIRECTED)
 

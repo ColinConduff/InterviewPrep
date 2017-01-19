@@ -154,7 +154,7 @@ class Graph(object):
 		for vertex in self._neighbors:
 			for neighbor in self._neighbors[vertex]:
 				if neighbor in in_degree_0:
-					in_degree_0.remove(neighbor)
+					in_degree_0.remove(neighbor) 
 
 		return in_degree_0
 
@@ -190,7 +190,12 @@ class Graph(object):
 		visited = set()
 		callback = lambda x: dfs_order.append(x)
 
-		for vertex in self._neighbors:
+		# Ensure that dfs starts at vertices with in-degree 0 first
+		# EX: A->B->C, starting at B gives the wrong result
+		vertices = list(self.vertices_with_in_degree_0())
+		vertices.extend(self._neighbors)
+
+		for vertex in vertices:
 			if vertex not in visited:
 				self._dfs(visited, callback, vertex)
 
@@ -202,8 +207,8 @@ class Graph(object):
 		
 		Time: O(|V| + |E|) 
 		"""
-
-		reversed_dfs_order = reversed(self._dfs_order())
+		dfs_order = self._dfs_order()
+		reversed_dfs_order = reversed(dfs_order)
 		
 		# visted and components have the same data / wasted space
 		visited = set()
