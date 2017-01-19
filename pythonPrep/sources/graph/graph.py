@@ -11,8 +11,8 @@ class GraphType(Enum):
 
 class Graph(object):
 	
-	def __init__(self, type=GraphType.DIRECTED):
-		self._graph_type = type
+	def __init__(self, graph_type=GraphType.DIRECTED):
+		self._graph_type = graph_type
 		self._neighbors = {}
 		self._vertex_count = 0
 		self._edge_count = 0
@@ -43,6 +43,12 @@ class Graph(object):
 
 	def __iter__(self):
 		return iter(self._neighbors)
+
+	def __eq__(self, rhs):
+		return self.graph_type == rhs.graph_type and \
+			self._vertex_count == rhs.vertex_count and \
+			self._edge_count == rhs.edge_count and \
+			self._neighbors == rhs.neighbors
 
 	def insert_vertex(self, vertex):
 		if vertex not in self._neighbors:
@@ -151,6 +157,39 @@ class Graph(object):
 					in_degree_0.remove(neighbor)
 
 		return in_degree_0
+
+	def strongly_connected_components(self):
+		""" 
+		Return the strongly connected components in the graph. 
+		Time: O(|V|^2)
+
+		Replace this with one of the following algorithms (which run in O(|E|+|V|)):
+		Kosaraju-Sharir, Tarjan, Gabow
+		"""
+		output = []
+		components = self.connected_components() # O(|V| + |E|)
+
+		for component in components:
+			if self._is_strongly_connected(component):
+				output.append(component)
+
+		return output
+
+
+	def _is_strongly_connected(self, component):
+		""" 
+		Return True if the component is strongly connected.  
+		Time: O(|v|^2)
+		"""
+		for v in component:
+			if len(self._neighbors[v])+1 != len(component): # Improve Average Time Complexity
+				return False
+
+			for u in component-set(v):
+				if v not in self._neighbors[u] or u not in self._neighbors[v]:
+					return False
+		return True
+
 
 
 

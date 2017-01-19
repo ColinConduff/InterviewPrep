@@ -3,6 +3,7 @@
 import unittest
 from sources.graph.graph import *
 from sources.graph.dijkstra import dijkstra
+from sources.graph.prim import minimum_spanning_tree
 
 class GraphTestCase(unittest.TestCase):
 
@@ -74,6 +75,8 @@ class GraphTestCase(unittest.TestCase):
 		self.assertTrue(expected == observed)
 
 	def test_connected_components(self):
+		# Should split this into two tests
+
 		ug = Graph(GraphType.UNDIRECTED)
 		dg = Graph(GraphType.DIRECTED)
 
@@ -99,12 +102,33 @@ class GraphTestCase(unittest.TestCase):
 		comp2 = set(["D", "E", "F"])
 
 		components = ug.connected_components()
-		for component in components:
-			self.assertTrue(component in [comp1, comp2])
+		self.assertTrue(all(comp in [comp1, comp2] for comp in components))
 
 		components = dg.connected_components()
-		for component in components:
-			self.assertTrue(component in [comp1, comp2])
+		self.assertTrue(all(comp in [comp1, comp2] for comp in components))
+
+	def test_strongly_connected_components(self):
+		ug = Graph(GraphType.UNDIRECTED)
+		
+		ug.insert_edge("A", "B")
+		comp1 = {"A", "B"}
+		expected = [comp1]
+		observed = ug.strongly_connected_components()
+
+		self.assertTrue(observed == expected)
+
+		ug.insert_edge("C", "D")
+		comp2 = {"C", "D"}
+		expected = [comp1, comp2]
+		observed = ug.strongly_connected_components()
+
+		self.assertTrue(all(comp in expected for comp in observed))
+
+		ug.insert_edge("D", "E")
+		expected = [comp1]
+		observed = ug.strongly_connected_components()
+
+		self.assertTrue(all(comp in expected for comp in observed))
 
 	def test_dijkstra(self):
 		dg = Graph(GraphType.DIRECTED)
@@ -127,6 +151,39 @@ class GraphTestCase(unittest.TestCase):
 		expected_distances = {"U": 8, "Y": 7, "X": 5, "S": 0, "V": 9}
 
 		self.assertTrue(observed_distances == expected_distances)
+
+	def test_prim(self):
+		prim_edges = [
+			("A", "B", 1),
+			("A", "D", 4),
+			("A", "E", 3),
+			("B", "D", 4),
+			("B", "E", 2),
+			("C", "E", 4),
+			("C", "F", 5),
+			("D", "E", 4),
+			("E", "F", 7),
+		]
+
+		g = Graph(GraphType.UNDIRECTED)
+		for u, v, weight in prim_edges:
+			g.insert_edge(u, v, weight)
+
+		mst = minimum_spanning_tree(g)
+
+		expected_edges = [
+			("A", "B", 1),
+			("A", "D", 4),
+			("B", "E", 2),
+			("C", "E", 4),
+			("C", "F", 5)
+		]
+
+		expected_graph = Graph(GraphType.UNDIRECTED)
+		for u, v, weight in expected_edges:
+			expected_graph.insert_edge(u, v, weight)
+
+		self.assertTrue(mst == expected_graph)
 
 
 if __name__ == '__main__':
