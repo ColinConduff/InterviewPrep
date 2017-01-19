@@ -158,27 +158,10 @@ class Graph(object):
 
 		return in_degree_0
 
-	def strongly_connected_components(self):
+	def _is_complete_component(self, component):
 		""" 
-		Return the strongly connected components in the graph. 
-		Time: O(|V|^2)
-
-		Replace this with one of the following algorithms (which run in O(|E|+|V|)):
-		Kosaraju-Sharir, Tarjan, Gabow
-		"""
-		output = []
-		components = self.connected_components() # O(|V| + |E|)
-
-		for component in components:
-			if self._is_strongly_connected(component):
-				output.append(component)
-
-		return output
-
-
-	def _is_strongly_connected(self, component):
-		""" 
-		Return True if the component is strongly connected.  
+		Return True if the component is a complete component (i.e. an edge exists 
+			between every vertex in the component).  
 		Time: O(|v|^2)
 		"""
 		for v in component:
@@ -189,6 +172,56 @@ class Graph(object):
 				if v not in self._neighbors[u] or u not in self._neighbors[v]:
 					return False
 		return True
+
+	def _dfs(self, visited, callback, node):
+		""" O(|V| + |E|) """
+
+		callback(node)
+		visited.add(node)
+
+		for neighbor, _ in self._neighbors[node].items():
+			if neighbor not in visited:
+				self._dfs(visited, callback, neighbor)
+
+	def _dfs_order(self):
+		""" O(|V| + |E|) """
+
+		dfs_order = []
+		visited = set()
+		callback = lambda x: dfs_order.append(x)
+
+		for vertex in self._neighbors:
+			if vertex not in visited:
+				self._dfs(visited, callback, vertex)
+
+		return dfs_order
+
+	def strongly_connected_components(self):
+		""" 
+		Return the graph's strongly connected components.
+		
+		Time: O(|V| + |E|) 
+		"""
+
+		reversed_dfs_order = reversed(self._dfs_order())
+		
+		# visted and components have the same data / wasted space
+		visited = set()
+		components = []
+
+		for vertex in reversed_dfs_order:
+			if vertex not in visited:
+				component = set()
+				callback = lambda x: component.add(x)
+
+				self._dfs(visited, callback, vertex)
+				
+				components.append(component)
+
+		return components
+
+
+
 
 
 

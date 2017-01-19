@@ -108,9 +108,10 @@ class GraphTestCase(unittest.TestCase):
 		self.assertTrue(all(comp in [comp1, comp2] for comp in components))
 
 	def test_strongly_connected_components(self):
-		ug = Graph(GraphType.UNDIRECTED)
+		ug = Graph(GraphType.DIRECTED)
 		
 		ug.insert_edge("A", "B")
+		ug.insert_edge("B", "A")
 		comp1 = {"A", "B"}
 		expected = [comp1]
 		observed = ug.strongly_connected_components()
@@ -118,14 +119,17 @@ class GraphTestCase(unittest.TestCase):
 		self.assertTrue(observed == expected)
 
 		ug.insert_edge("C", "D")
-		comp2 = {"C", "D"}
+		ug.insert_edge("D", "E")
+		ug.insert_edge("E", "C")
+		comp2 = {"C", "D", "E"}
 		expected = [comp1, comp2]
 		observed = ug.strongly_connected_components()
 
 		self.assertTrue(all(comp in expected for comp in observed))
 
-		ug.insert_edge("D", "E")
-		expected = [comp1]
+		ug.insert_vertex("F")
+		comp3 = {"F"}
+		expected = [comp1, comp2, comp3]
 		observed = ug.strongly_connected_components()
 
 		self.assertTrue(all(comp in expected for comp in observed))
