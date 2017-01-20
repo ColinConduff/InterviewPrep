@@ -203,6 +203,8 @@ class Graph(object):
 
 	def strongly_connected_components(self):
 		""" 
+		Note: incomplete implementation
+		
 		Return the graph's strongly connected components.
 		
 		Time: O(|V| + |E|) 
@@ -224,10 +226,3 @@ class Graph(object):
 				components.append(component)
 
 		return components
-
-
-
-
-
-
-
