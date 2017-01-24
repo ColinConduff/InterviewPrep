@@ -205,6 +205,22 @@ class GraphTestCase(unittest.TestCase):
 
 		self.assertTrue(mst == expected_graph)
 
+	def test_bfs(self):
+		edges = [
+			("A", "B"),
+			("A", "C"),
+			("B", "C")
+		]
+
+		g = Graph(GraphType.UNDIRECTED)
+		for u, v in edges:
+			g.insert_edge(u, v)
+
+		_, bfs_edges = g.bfs("A")
+		expected_edges = [("A", "B"), ("A", "C")]
+
+		self.assertTrue(all(edge in expected_edges for edge in bfs_edges))
+
 
 if __name__ == '__main__':
     unittests.main()

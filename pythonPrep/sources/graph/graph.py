@@ -1,5 +1,6 @@
 from enum import Enum
 from copy import deepcopy
+from collections import deque
 
 class GraphType(Enum):
 	DIRECTED = "Directed Graph"
@@ -226,3 +227,23 @@ class Graph(object):
 				components.append(component)
 
 		return components
+
+	def bfs(self, source):
+		""" Time: O(|V| + |E|) """
+		visited = {source}
+		queue = deque([source])
+		bfs_edges = []
+
+		while len(queue) > 0:
+			vertex = queue.popleft()
+
+			for neighbor in self._neighbors[vertex]:
+				if neighbor not in visited:
+					visited.add(neighbor)
+					queue.append(neighbor)
+					bfs_edges.append((vertex, neighbor))
+
+		return (visited, bfs_edges)
+
+
+
