@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+Adapted from Stanford Programming Abstractions Course 
+"""
+
 def power_of(base, exp):
 	if exp < 0:
 		raise Exception("Exponent must be >= 0.") 
@@ -73,7 +77,7 @@ def towers_of_hanoi(n):
 
 def _permute(current, letters, output):
 	"""
-	Time: O(n^n)
+	Time: O(!n)
 	"""
 	if len(letters) == 0:
 		output.add(current)
@@ -121,5 +125,67 @@ def subsets(string):
 	output = set()
 	_subsets(string, "", output)
 	return output
+
+def _diagonal_is_safe(max_row, max_col, row, col, placed_queens, mod_cell):
+	d_row = row
+	d_col = col
+	while d_row >= 0 and d_col >= 0 and \
+		d_row < max_row and d_col < max_col:
+
+		if (d_row, d_col) in placed_queens:
+			return False
+
+		d_row, d_col = mod_cell(d_row, d_col)
+
+	return True
+
+def _is_safe(max_row, max_col, row, col, placed_queens):
+	""" Time: O(max_row + max_col) """
+	for q_row, q_col in placed_queens:
+		if row == q_row or q_col == col:
+			return False
+
+	upper_right = lambda r, c: (r - 1, c + 1)
+	upper_left = lambda r, c: (r - 1, c - 1)
+	lower_right = lambda r, c: (r + 1, c + 1)
+	lower_left = lambda r, c: (r + 1, c - 1)
+
+	diagonals = [upper_right, upper_left, lower_right, lower_left]
+
+	for diagonal in diagonals:
+		if not _diagonal_is_safe(max_row, max_col, row, col, placed_queens, diagonal):
+			return False
+
+	return True
+
+def _did_place_all_queens(max_row, max_col, placed_queens, col=0):
+	""" Side effect: mutates placed_queens """
+
+	if col >= max_col:
+		return True
+
+	for row in range(max_row):
+		if _is_safe(max_row, max_col, row, col, placed_queens): # O(max_row + max_col)
+			placed_queens.add((row, col))
+
+			if _did_place_all_queens(max_row, max_col, placed_queens, col+1):
+				return True
+
+			placed_queens.remove((row, col))
+
+	return False
+
+def place_queens(max_row, max_col):
+	""" 
+	Recursion Back-Tracking Example
+
+	Find (row, col) for queens such that they are not
+		on the same row, column, or diagonal.
+
+	note: (0,0) is top left on board 
+	"""
+	placed_queens = set()
+	_did_place_all_queens(max_row, max_col, placed_queens)
+	return placed_queens
 
 # if __name__ == '__main__':
