@@ -37,14 +37,12 @@ class SwiftBridgeTests: XCTestCase {
       ccb.enqueue(num)
     }
     
-    ccb.print()
     XCTAssertTrue(ccb.count == 16)
     
     for num in test1 {
       XCTAssertTrue(num == ccb.dequeue())
     }
     
-    ccb.print()
     XCTAssertTrue(ccb.count == 0)
 
     let test2 = Array(1...8)

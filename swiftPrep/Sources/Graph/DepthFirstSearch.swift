@@ -24,7 +24,7 @@ func dfs_iterative(neighbors: [String: [String: Int]], source: String) -> [Strin
 	var visited = [source: [source]]
 	var stack = [source]
 
-	while let vertex = stack.pop() {
+	while let vertex = stack.popLast() {
 		for (neighbor, _) in neighbors[vertex]! {
 			if visited[neighbor] == nil {
 				visited[neighbor] = visited[vertex]! + [neighbor]

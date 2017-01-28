@@ -2,18 +2,6 @@
 import Foundation
 import CModule
 
-/*
-CircularBuffer* create_circular_buffer();
-void delete_circular_buffer(CircularBuffer* buffer);
-
-int circular_buffer_length(CircularBuffer* buffer);
-
-void enqueue_circular_buffer(CircularBuffer* buffer, int item);
-int dequeue_circular_buffer(CircularBuffer* buffer);
-
-void print_circular_buffer(ArrayList *array);
-*/
-
 /**
 A wrapper for circularBuffer.c
 */
