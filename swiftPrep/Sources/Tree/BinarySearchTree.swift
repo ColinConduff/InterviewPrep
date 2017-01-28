@@ -6,8 +6,12 @@ fileprivate class Node {
 	var right: Node?
 	var sizeOfSubtree: Int
 	
-	init(key: Int, value: Int, left: Node?=nil, right: Node?=nil, sizeOfSubtree: Int=1) {
-
+	init(key: Int, 
+		value: Int, 
+		left: Node?=nil, 
+		right: Node?=nil, 
+		sizeOfSubtree: Int=1) 
+	{
 		self.key = key
 		self.value = value
 		self.left = left

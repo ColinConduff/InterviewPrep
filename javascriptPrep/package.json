@@ -1,0 +1,14 @@
+{
+  "name": "jsprep",
+  "version": "1.0.0",
+  "description": "Common data structures and algorithms written in javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Colin Conduff",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^2.5.3"
+  }
+}

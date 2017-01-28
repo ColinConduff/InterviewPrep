@@ -64,7 +64,7 @@ static void contract(ArrayList *array) {
 
 void array_insert(ArrayList *array, unsigned int index, int data) {
 
-    // Time: Amortized O(n)
+    // Time: O(n)
 
     if(index > array->length) { return; }
 

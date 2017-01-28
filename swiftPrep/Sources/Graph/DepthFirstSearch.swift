@@ -18,3 +18,20 @@ func dfs(neighbors: [String: [String: Int]], source: String) -> [String: [String
 
     return visited
 }
+
+func dfs_iterative(neighbors: [String: [String: Int]], source: String) -> [String: [String]] 
+{
+	var visited = [source: [source]]
+	var stack = [source]
+
+	while let vertex = stack.pop() {
+		for (neighbor, _) in neighbors[vertex]! {
+			if visited[neighbor] == nil {
+				visited[neighbor] = visited[vertex]! + [neighbor]
+				stack.append(neighbor)
+			}
+		}
+	}
+
+	return visited
+}
