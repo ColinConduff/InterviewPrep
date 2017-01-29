@@ -3,7 +3,7 @@
 	Sort the sequence in ascending order.
 
 	Time: O(n+k) where k is the range (max - min).
-	Space: O(n)
+	Space: O(k)
  */
 func countingSort(sequence: inout [Int]) {
 	guard sequence.count > 1 else { return }
