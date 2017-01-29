@@ -54,6 +54,12 @@ class SortingTestCase(unittest.TestCase):
 			counting_sort(observed)
 			self.assertTrue(expected == observed)
 
+		# test list containing str
+		observed = ["d", "b", "c", "a"]
+		expected = sorted(observed)
+		counting_sort(observed)
+		self.assertTrue(expected == observed)
+
 
 if __name__ == '__main__':
     unittests.main()
