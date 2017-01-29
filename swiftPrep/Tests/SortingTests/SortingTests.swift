@@ -30,6 +30,17 @@ class SortingTests: XCTestCase {
     resetSequence()
     insertionSort(sequence: &sequence)
     XCTAssertEqual(sequence, sortedSequence)
+
+    // Test online sorting
+    resetSequence()
+    var onlineSequence = [Int]()
+    onlineSequence.append(sequence.popLast()!)
+
+    while let item = sequence.popLast() {
+      onlineSequence.append(item)
+      insertionSort(sequence: &onlineSequence, startIndex: onlineSequence.endIndex - 1)
+    }
+    XCTAssertEqual(onlineSequence, sortedSequence)
   }
 
   func testCountingSort() {
