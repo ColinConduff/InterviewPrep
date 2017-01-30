@@ -52,6 +52,14 @@ class HashMap(object):
 				return index
 
 	def _new_keys_and_values(self, items):
+		""" 
+		Best-case:
+			No collisions 
+			Theta(n)
+		Worst-case:
+			Collision occurs on every insertion
+			Theta(n^2)
+		"""
 		self._item_count = 0
 
 		self._keys = [None for _ in range(self._container_size)]
@@ -61,6 +69,7 @@ class HashMap(object):
 			self._insert_item(key, value)
 
 	def _insert_item(self, key, value):
+		""" Amortized O(1) """
 		self._expand_container_if_necessary()
 
 		for index in self._find_index(key):
@@ -71,13 +80,29 @@ class HashMap(object):
 				break
 
 	def _expand_container_if_necessary(self):
+		""" Amortized O(1) """
 		if self._item_count + 1 >= self._container_size:
+			self._container_size *= 2
+			self._new_keys_and_values(list(self.items))
+
+	def _contract_container_if_necessary(self):
+		""" Amortized O(1) """
+		if self._item_count <= self._container_size / 4:
 			self._container_size *= 2
 			self._new_keys_and_values(list(self.items))
 
 	def _find_index(self, key):
 		""" 
 		Use linear probing to find the index corresponding to the key.
+
+		Amortized O(1)
+
+		Best-case:
+			No collision
+			Theta(1)
+		Worst-case:
+			Collision occurs and all subsequent slots are full, except last one
+			Theta(n)
 
 		Using the following iter might be more straightforward 
 		iter(list(range(hash_index, _container_size)) + list(range(hash_index)))
