@@ -1,7 +1,5 @@
 describe("sorting", function() {
-  let sorting = require('../lib/sorting');
-  let insertionSort = sorting.insertionSort;
-
+  const sortingFunctions = require('../lib/sorting');
   let testCases;
 
   beforeEach(function() {
@@ -9,14 +7,23 @@ describe("sorting", function() {
 	  	{observed: [5,4,3,2,1], expected: [1,2,3,4,5]},
 	  	{observed: [5,2,3,4,1], expected: [1,2,3,4,5]},
 	  	{observed: [], expected: []},
-	  	{observed: [1], expected: [1]},
+	  	{observed: [1], expected: [1]}
 	  ];
   });
 
-  it("(insertion sort) should sort the sequence in ascending order", function() {
-	testCases.forEach(function(testCase, _, _) {
-		insertionSort(testCase.observed);
-		expect(testCase.observed).toEqual(testCase.expected);
+  for (let property in sortingFunctions) {
+  	const sortingFunction = sortingFunctions[property]
+
+	it(`(${sortingFunction.name}) should sort the sequence in ascending order`, function() {
+		testCases.forEach(function(testCase) {
+			observed = sortingFunction(testCase.observed);
+
+			if (observed !== undefined) {
+				expect(observed).toEqual(testCase.expected);
+			} else {
+				expect(testCase.observed).toEqual(testCase.expected);
+			}
+		});
 	});
-  });
+  }
 });
