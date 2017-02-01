@@ -2,6 +2,8 @@
 
 "use strict";
 
+const LinkedList = require('./LinkedList');
+
 class Node {
 	constructor(data, next=null) {
 		this.data = data;
@@ -9,17 +11,10 @@ class Node {
 	}
 }
 
-class SinglyLinkedList {
-	constructor() {
-		this._head = null;
-		this._size = 0;
-	}
+class SinglyLinkedList extends LinkedList {
 
-	get length() {
-		return this._size;
-	}
-
-	get array() {
+	// Override array
+	get toArray() {
 		let array = [];
 		let node = this._head;
 
@@ -31,6 +26,7 @@ class SinglyLinkedList {
 		return array;
 	}
 
+	// Override insert
 	insert(data, index) {
 		if (index < 0 || index > this._size) {
 			throw new Error("Index Out of Range");
@@ -54,14 +50,7 @@ class SinglyLinkedList {
 		}
 	}
 
-	append(data) {
-		this.insert(data, this._size);
-	}
-
-	appendFront(data) {
-		this.insert(data, 0);
-	}
-
+	// Override popFrom
 	popFrom(index) {
 		if (index < 0 || index >= this._size) {
 			throw new Error("Index Out of Range");
@@ -88,14 +77,6 @@ class SinglyLinkedList {
 		}
 
 		return (nodeToReturn !== null) ? nodeToReturn.data : null;
-	}
-
-	popLast() {
-		return this.popFrom(this._size - 1);
-	}
-
-	popFront() {
-		return this.popFrom(0);
 	}
 }
 

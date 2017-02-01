@@ -2,8 +2,10 @@
 
 "use strict";
 
-const SinglyLinkedList = require('./singlyLinkedList');
+const SinglyLinkedList = require('./SinglyLinkedList');
+const CircularlyLinkedList = require('./CircularlyLinkedList');
 
 module.exports = {  
-	SinglyLinkedList
+	SinglyLinkedList,
+	CircularlyLinkedList
 }

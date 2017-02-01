@@ -1,77 +1,81 @@
 describe("linkedLists", function() {
 	const linkedListsModule = require('../lib/linkedLists');
-	const SinglyLinkedList = linkedListsModule.SinglyLinkedList;
+	//const SinglyLinkedList = linkedListsModule.SinglyLinkedList;
 
-	var singlyLinkedList;
+	for (let property in linkedListsModule) {
+  		const LinkedListSubClass = linkedListsModule[property];
 
-	beforeEach(function() {
-    	singlyLinkedList = new SinglyLinkedList();
-	});
+		var linkedList;
 
-	describe("#insert", function() {
-		it("should throw an exception if index is out of bounds", function() {
-			expect(function() {
-				singlyLinkedList.insert(5, -1);
-			}).toThrowError("Index Out of Range");
-
-			expect(function() {
-				singlyLinkedList.insert(5, 1);
-			}).toThrowError("Index Out of Range");
+		beforeEach(function() {
+	    	linkedList = new LinkedListSubClass();
 		});
-	});
 
-	describe("#remove", function() {
-		it("should throw an exception if index is out of bounds", function() {
-			expect(function() {
-				singlyLinkedList.insert(5, -1);
-			}).toThrowError("Index Out of Range");
-			
-			expect(function() {
-				singlyLinkedList.insert(5, 1);
-			}).toThrowError("Index Out of Range");
+		describe("#insert", function() {
+			it("should throw an exception if index is out of bounds", function() {
+				expect(function() {
+					linkedList.insert(5, -1);
+				}).toThrowError("Index Out of Range");
+
+				expect(function() {
+					linkedList.insert(5, 1);
+				}).toThrowError("Index Out of Range");
+			});
 		});
-	});
 
-	it("should appendFront", function() {
-		singlyLinkedList.appendFront(1);
+		describe("#remove", function() {
+			it("should throw an exception if index is out of bounds", function() {
+				expect(function() {
+					linkedList.insert(5, -1);
+				}).toThrowError("Index Out of Range");
+				
+				expect(function() {
+					linkedList.insert(5, 1);
+				}).toThrowError("Index Out of Range");
+			});
+		});
 
-		expect(singlyLinkedList.length).toEqual(1);
-		expect(singlyLinkedList.array).toEqual([1]);
+		it("should appendFront", function() {
+			linkedList.appendFront(1);
 
-		singlyLinkedList.appendFront(2);
+			expect(linkedList.length).toEqual(1);
+			expect(linkedList.toArray).toEqual([1]);
 
-		expect(singlyLinkedList.length).toEqual(2);
-		expect(singlyLinkedList.array).toEqual([2,1]);
-  	});
+			linkedList.appendFront(2);
 
-  	it("should append", function() {
-		singlyLinkedList.append(1);
-		singlyLinkedList.append(2);
+			expect(linkedList.length).toEqual(2);
+			expect(linkedList.toArray).toEqual([2,1]);
+	  	});
 
-		expect(singlyLinkedList.length).toEqual(2);
-		expect(singlyLinkedList.array).toEqual([1,2]);
-  	});
+	  	it("should append", function() {
+			linkedList.append(1);
+			linkedList.append(2);
 
-  	it("should popFront", function() {
-		singlyLinkedList.append(1);
-		singlyLinkedList.append(2);
+			expect(linkedList.length).toEqual(2);
+			expect(linkedList.toArray).toEqual([1,2]);
+	  	});
 
-		expect(singlyLinkedList.popFront()).toEqual(1);
-		expect(singlyLinkedList.length).toEqual(1);
+	  	it("should popFront", function() {
+			linkedList.append(1);
+			linkedList.append(2);
 
-		expect(singlyLinkedList.popFront()).toEqual(2);
-		expect(singlyLinkedList.length).toEqual(0);
-  	});
+			expect(linkedList.popFront()).toEqual(1);
+			expect(linkedList.length).toEqual(1);
 
-  	it("should popLast", function() {
-		singlyLinkedList.append(1);
-		singlyLinkedList.append(2);
+			expect(linkedList.popFront()).toEqual(2);
+			expect(linkedList.length).toEqual(0);
+	  	});
 
-		expect(singlyLinkedList.popLast()).toEqual(2);
-		expect(singlyLinkedList.length).toEqual(1);
+	  	it("should popLast", function() {
+			linkedList.append(1);
+			linkedList.append(2);
 
-		expect(singlyLinkedList.popLast()).toEqual(1);
-		expect(singlyLinkedList.length).toEqual(0);
-  	});
+			expect(linkedList.popLast()).toEqual(2);
+			expect(linkedList.length).toEqual(1);
+
+			expect(linkedList.popLast()).toEqual(1);
+			expect(linkedList.length).toEqual(0);
+	  	});
+	}
 });
 
