@@ -1,6 +1,5 @@
 describe("linkedLists", function() {
 	const linkedListsModule = require('../lib/linkedLists');
-	//const SinglyLinkedList = linkedListsModule.SinglyLinkedList;
 
 	for (let property in linkedListsModule) {
   		const LinkedListSubClass = linkedListsModule[property];
