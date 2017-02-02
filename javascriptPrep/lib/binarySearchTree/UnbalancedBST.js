@@ -26,6 +26,27 @@ class UnbalancedBST {
 		return (node ? node.sizeOfSubtree : 0);
 	}
 
+	traversal(traversalType, callback) {
+		this._traversal(traversalType, callback, this._root);
+	}
+
+	_traversal(traversalType, callback, node) {
+		if (!node) return;
+
+		if (traversalType === "pre") 
+			callback(node);
+
+		this._traversal(traversalType, callback, node.left);
+
+		if (traversalType === "in") 
+			callback(node); 
+
+		this._traversal(traversalType, callback, node.right);
+
+		if (traversalType === "post") 
+			callback(node);
+	}
+
 	put(key, value) {
 		this._root = this._put(key, value, this._root);
 	}
