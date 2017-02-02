@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class BSTNode;
+
 /**
  Interface for a node to be used in a binary search tree.
  */

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "BSTNode.h"
 
+@class BinarySearchTree;
+
 /**
  Used for specifying the type of traversal (pre-, in-, or post-).
  */
