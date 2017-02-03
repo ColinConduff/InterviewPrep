@@ -5,37 +5,42 @@
 	Not tested yet
  */
 
+import Darwin
+
 enum Suit: Int {
 	case club = 0, diamond = 1, heart = 2, spade = 3
 }
 
-protocol Card {
-	var faceValue: Int { get }
-	var suit: Suit { get }
-	var available: Bool { get set }
-}
+struct Card {
 
-struct CardFactory: Card {
+	var available: Bool
+	let faceValue: Int
+	let suit: Suit
 
-	internal var available: Bool
-	internal let faceValue: Int
-	internal let suit: Suit
-
-	init(int faceValue, Suit suit) {
+	init(faceValue: Int, suit: Suit) {
 		self.available = true
 		self.faceValue = faceValue
 		self.suit = suit
 	}
 }
 
+// Restrict how a hand can be used
 protocol Hand {
 	var cards: [Card] { get }
 	func score() -> Int 
-	func add(card: Card)
+	mutating func add(card: Card)
 }
 
-struct HandFactory<Card>: Hand {
-	internal var cards = [Card]()
+/**
+ Creates a hand and defines its behavior.
+
+ "cards" must be mutable to allow adding to it,
+ however other mutating operations should be prevented,
+ so other classes should make a hand with HandMaker
+ and then treat the instance as a hand
+ */
+struct HandMaker: Hand {
+	var cards = [Card]()
 
 	init(cards: [Card]) { self.cards = cards }
 
@@ -49,11 +54,11 @@ struct HandFactory<Card>: Hand {
 	}
 }
 
-class Deck<Card>: DeckProtocol {
+class Deck {
 	private var cardQueue: ArraySlice<Card>
 
 	init() {
-		self.cards = [Card]()
+		self.cardQueue = ArraySlice<Card>()
 	}
 
 	func shuffle() {
@@ -66,7 +71,7 @@ class Deck<Card>: DeckProtocol {
         let zipped = zip(cards.indices, stride(from: cards.count, to: 1, by: -1))
 
         for (firstUnshuffled , unshuffledCount) in zipped {
-            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            let d = Int(arc4random_uniform(UInt32(unshuffledCount)))
             if d != 0 {
             	let i = cards.index(firstUnshuffled, offsetBy: d)
             	swap(&cards[firstUnshuffled], &cards[i])
@@ -76,22 +81,22 @@ class Deck<Card>: DeckProtocol {
 	}
 
 	func cardsRemaining() -> Int {
-		return cards.count
+		return cardQueue.count
 	}
 
 	func dealHand(ofSize size: Int) -> Hand {
-		let cardsInHand = [Card]()
+		var cardsInHand = [Card]()
 		for _ in 1...size {
 			if let card = dealCard() { 
-				cardsInHand.append(dealCard())
+				cardsInHand.append(card)
 			} else {
 				break
 			}
 		}
-		return HandFactory(cards: cardsInHand)
+		return HandMaker(cards: cardsInHand)
 	}
 
 	func dealCard() -> Card? {
-		return cards.popFirst()
+		return cardQueue.popFirst()
 	}
 }
