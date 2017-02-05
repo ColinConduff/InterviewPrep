@@ -2,6 +2,10 @@
 import Foundation
 import CModule
 
+enum CError: Error { 
+    case nullFound 
+}
+
 /**
 A wrapper for circularBuffer.c
 */
@@ -14,8 +18,12 @@ class CCircularBuffer {
         }
     }
 
-    init(container_size: Int = 16) {
-        _ptr = create_circular_buffer(UInt32(container_size))
+    init(container_size: Int = 16) throws {
+        if let ptr = create_circular_buffer(UInt32(container_size)) {
+            self._ptr = ptr
+        } else {
+            throw CError.nullFound
+        }
     }
 
     deinit {
@@ -26,7 +34,7 @@ class CCircularBuffer {
         enqueue_circular_buffer(_ptr, Int32(data))
     }
 
-    func dequeue() -> Int {
+    func dequeue() -> Int? {
         return Int(dequeue_circular_buffer(_ptr))
     }
 

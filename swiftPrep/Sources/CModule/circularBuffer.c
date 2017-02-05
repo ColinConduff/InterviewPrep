@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 
 #include "include/circularBuffer.h"
@@ -11,7 +12,9 @@ CircularBuffer* create_circular_buffer(unsigned int container_size)
 
 	buffer = (CircularBuffer*) malloc(sizeof(CircularBuffer));
 
-	if (buffer == NULL) { return NULL; }
+	if (buffer == NULL) { 
+		perror("malloc failed"); 
+	}
 
 	buffer->container_size = container_size;
     buffer->item_count = 0;
@@ -21,7 +24,7 @@ CircularBuffer* create_circular_buffer(unsigned int container_size)
 
     if (buffer->data == NULL) {
         free(buffer);
-        return NULL;
+        perror("malloc failed");
     }
 
     return buffer;
@@ -29,7 +32,10 @@ CircularBuffer* create_circular_buffer(unsigned int container_size)
 
 void delete_circular_buffer(CircularBuffer* buffer)
 {
-	if (buffer != NULL) 
+	if (buffer == NULL) {
+		perror("Free failed");
+	}
+	else
 	{ 
 		free(buffer->data); 
 		free(buffer);
@@ -51,7 +57,9 @@ Must watch for stale/invalid data being accessed.
 */
 void enqueue_circular_buffer(CircularBuffer* buffer, int item)
 {
-	if (buffer == NULL) { return; }
+	if (buffer == NULL) { 
+		perror("Enqueue failed"); 
+	}
 
 	buffer->data[buffer->write_index] = item;
 
@@ -61,16 +69,14 @@ void enqueue_circular_buffer(CircularBuffer* buffer, int item)
 
 /**
 Pop an item off of the queue.
-
-Need to figure out a better way to return errors.
-Maybe return struct that represents optional values.
 */
 int dequeue_circular_buffer(CircularBuffer* buffer)
 {
 	int item;
 
-	if (buffer == NULL) { return -1; }
-	if (buffer->item_count == 0) { return -1; }
+	if (buffer == NULL || buffer->item_count == 0) { 
+		perror("Dequeue failed");
+	}
 
 	item = buffer->data[buffer->read_index];
 
@@ -82,8 +88,10 @@ int dequeue_circular_buffer(CircularBuffer* buffer)
 
 void print_circular_buffer(CircularBuffer* buffer) 
 {
-    const int c_str_size = buffer->item_count * 2; // size = items + spaces
-    char str[c_str_size];
+	if (buffer == NULL) { perror("Print failed"); }
+	
+    const int C_STR_SIZE = buffer->item_count * 2; // size = items + spaces
+    char str[C_STR_SIZE];
     int i;
     int c_str_index;
 
@@ -93,7 +101,7 @@ void print_circular_buffer(CircularBuffer* buffer)
     	 i < buffer->container_size && i < buffer->write_index; 
     	 i++) 
     {
-       c_str_index += snprintf(&str[c_str_index], c_str_size, "%d ", buffer->data[i]);
+       c_str_index += snprintf(&str[c_str_index], C_STR_SIZE, "%d ", buffer->data[i]);
     }
 
     // Wrap around to the beginning if necessary
@@ -101,7 +109,7 @@ void print_circular_buffer(CircularBuffer* buffer)
     {
 	    for (i = 0; i < buffer->write_index; i++) 
 	    {
-	       c_str_index += snprintf(&str[c_str_index], c_str_size, "%d ", buffer->data[i]);
+	       c_str_index += snprintf(&str[c_str_index], C_STR_SIZE, "%d ", buffer->data[i]);
 	    }
 	}
 
@@ -114,7 +122,9 @@ Sets it to 0 if it reaches the end of the container.
 */
 static void inc_read_index(CircularBuffer *buffer) 
 {
-	if (buffer == NULL) { return; }
+	if (buffer == NULL) { 
+		perror("Inc read index failed");
+	}
 	
 	++(buffer->read_index);
 
@@ -129,7 +139,9 @@ Sets it to 0 if it reaches the end of the container.
 */
 static void inc_write_index(CircularBuffer *buffer) 
 {
-	if (buffer == NULL) { return; }
+	if (buffer == NULL) { 
+		perror("Inc write index failed"); 
+	}
 	
 	++(buffer->write_index);
 
