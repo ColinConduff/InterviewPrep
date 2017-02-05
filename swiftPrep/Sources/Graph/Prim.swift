@@ -1,23 +1,25 @@
 
+import Tree
+
 func prim(neighbors: [String: [String: Int]]) -> [(String, String, Int)] {
 	
 	guard let (startingVertex, _) = neighbors.first else { return [(String, String, Int)]() }
 	var visited = Set([startingVertex])
-	var priority_q = Heap<(Int, String, String)>(sort: <)
+	var priorityQ = Heap<(Int, String, String)>(orderedBy: <)
 	
 	var edges = [(String, String, Int)]()
 
 	for (neighbor, edgeWeight) in neighbors[startingVertex]! {
-		priority_q.insert((edgeWeight, startingVertex, neighbor))
+		priorityQ.push((edgeWeight, startingVertex, neighbor))
 	}
 
-	while let (edgeWeight, u, v) = priority_q.remove() {
+	while let (edgeWeight, u, v) = priorityQ.pop() {
 		if !visited.contains(v) {
 			visited.insert(v)
 
 			for (w, nextEdgeWeight) in neighbors[v]! {
 				if !visited.contains(w) {
-					priority_q.insert((nextEdgeWeight, v, w))
+					priorityQ.push((nextEdgeWeight, v, w))
 				}
 			}
 

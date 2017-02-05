@@ -51,23 +51,51 @@ class TreeTests: XCTestCase {
     XCTAssertEqual(Set(words), Set(trie.wordsStartingWith(prefix: "")))
   }
 
-  func testHeap() {
-    var sequence = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+  func testIntHeap() {
     var solution = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
-    heapify(&sequence)
+    var heap = Heap<Int>(sequence: solution, orderedBy: <)
 
-    while let item = heappop(&sequence), let expected = solution.popLast() {
+    while let item = heap.pop(), let expected = solution.popLast() {
         XCTAssertEqual(item, expected)
     }
 
-    let sequenceToPush = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-    let uniqueSolution = [1, 2, 6, 5, 3, 10, 7, 10, 8, 9, 4]
+    var sequenceToPush = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
     
     for num in sequenceToPush {
-        heappush(&sequence, item: num)
+        heap.push(num)
     }
 
-    XCTAssertEqual(sequence, uniqueSolution)
+    while let item = heap.pop(), let expected = sequenceToPush.popLast() {
+        XCTAssertEqual(item, expected)
+    }
+  }
+
+  func testPriorityQueue() {
+    var solution = [
+        (10, "A"), (9, "B"), (8, "C"), (7, "A"), (6, "B"), 
+        (5, "C"), (4, "C"), (3, "B"), (2, "A"), (1, "A")
+    ]
+
+    var heap = Heap<(Int, String)>(sequence: solution, orderedBy: <)
+
+    while let item = heap.pop(), let expected = solution.popLast() {
+        XCTAssertEqual(item.0, expected.0)
+        XCTAssertEqual(item.1, expected.1)
+    }
+
+    var sequenceToPush = [
+        (10, "A"), (9, "B"), (8, "C"), (7, "A"), (6, "B"), 
+        (5, "C"), (4, "C"), (3, "B"), (2, "A"), (1, "A")
+    ]
+    
+    for item in sequenceToPush {
+        heap.push(item)
+    }
+
+    while let item = heap.pop(), let expected = sequenceToPush.popLast() {
+        XCTAssertEqual(item.0, expected.0)
+        XCTAssertEqual(item.1, expected.1)
+    }
   }
 }

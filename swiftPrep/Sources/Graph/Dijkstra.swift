@@ -1,12 +1,14 @@
 
+import Tree
 
-func dijkstra(neighbors: [String: [String: Int]], source: String) -> ([String: Int], [String: [String]]) {
+func dijkstra(neighbors: [String: [String: Int]], source: String) 
+	-> (visited: [String: Int], paths: [String: [String]]) {
 	
 	var visited = [source: 0]
 	var paths = [source: [source]]
-	var priority_q = Heap<(Int, String)>(array: [(0, source)], sort: <)
+	var priorityQ = Heap<(Int, String)>(sequence: [(0, source)], orderedBy: <)
 
-	while let (distance, vertex) = priority_q.remove() {
+	while let (distance, vertex) = priorityQ.pop() {
 
 		for (neighbor, edgeWeight) in neighbors[vertex]! {
 			let dist_from_source_to_neighbor = distance + edgeWeight
@@ -16,7 +18,7 @@ func dijkstra(neighbors: [String: [String: Int]], source: String) -> ([String: I
 
 				visited[neighbor] = dist_from_source_to_neighbor
 				paths[neighbor] = paths[vertex]! + [neighbor]
-				priority_q.insert((dist_from_source_to_neighbor, neighbor))
+				priorityQ.push((dist_from_source_to_neighbor, neighbor))
 			}
 		}
 	}
