@@ -1,14 +1,21 @@
 
-class HashMap(object):
+from enum import Enum 
+
+class HashMethod(Enum):
+	LINEAR_PROBING = "Linear probing"
+	QUADRATIC_PROBING = "Quadratic probing"
+
+class Dictionary(object):
 	""" 
-	Implementation of a hash map data structure. 
+	Implementation of a dictionary data structure. 
 
 	Currently uses linear probing.
 	"""
 	_DELETION_FLAG = '\n' # replace with enum?
 
-	def __init__(self, items=None):
+	def __init__(self, hash_method, items=None):
 		self._item_count = 0
+		self._hash_method = hash_method
 
 		if items is None:
 			self._container_size = 8
@@ -55,12 +62,12 @@ class HashMap(object):
 		Replace the key's slot with a special flag indicating deletion. 
 
 		Raises: 
-			KeyError if the key is not in the hash map.
+			KeyError if the key is not in the dictionary.
 		"""
 		self._delete_item(key)
 
 	def _is_valid_item(self, item):
-		return item is not None and item != HashMap._DELETION_FLAG
+		return item is not None and item != Dictionary._DELETION_FLAG
 
 	def _search(self, key):
 		""" 
@@ -81,7 +88,7 @@ class HashMap(object):
 		self._expand_container_if_necessary()
 
 		for index in self._find_index(key):
-			if self._keys[index] is None or self._keys[index] == HashMap._DELETION_FLAG:
+			if self._keys[index] is None or self._keys[index] == Dictionary._DELETION_FLAG:
 				self._item_count += 1
 				self._keys[index] = key
 				self._values[index] = value
@@ -97,7 +104,7 @@ class HashMap(object):
 
 			if self._keys[index] == key:
 				self._item_count -= 1
-				self._keys[index] = HashMap._DELETION_FLAG
+				self._keys[index] = Dictionary._DELETION_FLAG
 				self._values[index] = None
 				break
 
@@ -136,6 +143,17 @@ class HashMap(object):
 
 	def _find_index(self, key):
 		""" 
+		Find the index corresponding to the key.
+
+		Amortized O(1)
+		"""
+		if self._hash_method == HashMethod.LINEAR_PROBING:
+			yield from self._find_index_using_linear_probing(key)
+		else:
+			yield from self._find_index_using_quadratic_probing(key)
+
+	def _find_index_using_linear_probing(self, key):
+		""" 
 		Use linear probing to find the index corresponding to the key.
 
 		Amortized O(1)
@@ -157,6 +175,27 @@ class HashMap(object):
 		while True:
 			try:
 				yield next(indices)
+			except StopIteration:
+				break
+
+	def _find_index_using_quadratic_probing(self, key):
+		""" 
+		Use quadratic probing to find the index corresponding to the key.
+
+		Amortized O(1)
+
+		Best-case:
+			No collision
+			Theta(1)
+		Worst-case:
+			Collision occurs and all subsequent slots are full, except last one
+			Theta(n)
+		"""
+		indices = iter(range(self._container_size))
+
+		while True:
+			try:
+				yield (hash(key) + pow(next(indices),2)) % self._container_size
 			except StopIteration:
 				break
 

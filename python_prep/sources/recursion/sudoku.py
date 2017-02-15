@@ -9,20 +9,20 @@ def solve_sudoku(grid):
 		raise Exception("Not a valid sudoku puzzle.")
 
 	# Trade off size complexity for fast lookup
-	Peek = namedtuple('Peek', ['row', 'col', 'square'])
-	peeker = Peek(row=[set(row) for row in grid], 
-				  col=[set(col) for col in zip(*grid)], 
-			      square=[set() for _ in range(9)]) 
+	LookupTable = namedtuple('LookupTable', ['row', 'col', 'square'])
+	lookupTable = LookupTable(row=[set(row) for row in grid], 
+				         col=[set(col) for col in zip(*grid)], 
+			             square=[set() for _ in range(9)]) 
 
-	_setup_peeker_square(grid, peeker)
+	_setup_lookup_square(grid, lookupTable)
 	
-	if not _sudoku_puzzle_is_solved(grid, peeker):
+	if not _sudoku_puzzle_is_solved(grid, lookupTable):
 		raise Exception("No solution found.")
 	
 	# print(numpy.matrix(grid))
 	return grid
 
-def _sudoku_puzzle_is_solved(grid, peeker, row=0, col=0):
+def _sudoku_puzzle_is_solved(grid, lookupTable, row=0, col=0):
 	""" Side effect: solves sudoku puzzle """
 
 	if _last_position_is_filled(grid):
@@ -34,16 +34,16 @@ def _sudoku_puzzle_is_solved(grid, peeker, row=0, col=0):
 
 	for num in range(1, 10):
 
-		if not _conflict_exists(peeker, row, col, num):
+		if not _conflict_exists(lookupTable, row, col, num):
 
-			_add(grid, peeker, num, row, col)
+			_add(grid, lookupTable, num, row, col)
 
 			next_row, next_col = _next_cell(row, col)
 
-			if _sudoku_puzzle_is_solved(grid, peeker, next_row, next_col):
+			if _sudoku_puzzle_is_solved(grid, lookupTable, next_row, next_col):
 				return True
 
-			_remove(grid, peeker, num, row, col)
+			_remove(grid, lookupTable, num, row, col)
 
 	return False
 
@@ -62,27 +62,23 @@ def _last_position_is_filled(grid):
 	last_col = len(grid[0]) - 1
 	return grid[last_row][last_col] != 0
 
-def _add(grid, peeker, num, row, col):
+def _add(grid, lookupTable, num, row, col):
 	grid[row][col] = num
-	peeker.row[row].add(num)
-	peeker.col[col].add(num)
-	peeker.square[_square_num(row, col)].add(num)
+	lookupTable.row[row].add(num)
+	lookupTable.col[col].add(num)
+	lookupTable.square[_square_num(row, col)].add(num)
 
-def _remove(grid, peeker, num, row, col):
+def _remove(grid, lookupTable, num, row, col):
 	grid[row][col] = 0
-	peeker.row[row].remove(num)
-	peeker.col[col].remove(num)
-	peeker.square[_square_num(row, col)].remove(num)
+	lookupTable.row[row].remove(num)
+	lookupTable.col[col].remove(num)
+	lookupTable.square[_square_num(row, col)].remove(num)
 
-def _conflict_exists(peeker, row, col, num):
+def _conflict_exists(lookupTable, row, col, num):
 
-	if num in peeker.row[row] or \
-		num in peeker.col[col] or \
-		num in peeker.square[_square_num(row, col)]:
-		
-		return True
-
-	return False
+	return (num in lookupTable.row[row] or \
+		    num in lookupTable.col[col] or \
+		    num in lookupTable.square[_square_num(row, col)])
 
 def _square_num(row, col):
 	if 0 <= row < 3:
@@ -107,28 +103,28 @@ def _square_num(row, col):
 		elif 6 <= col < 9:
 			return 8
 
-def _setup_peeker_square(grid, peeker):
+def _setup_lookup_square(grid, lookupTable):
 	for row in grid[:3]:
 		for num in row[:3]:
-			peeker.square[0].add(num)
+			lookupTable.square[0].add(num)
 		for num in row[3:6]:
-			peeker.square[1].add(num)
+			lookupTable.square[1].add(num)
 		for num in row[6:9]:
-			peeker.square[2].add(num)
+			lookupTable.square[2].add(num)
 
 	for row in grid[3:6]:
 		for num in row[:3]:
-			peeker.square[3].add(num)
+			lookupTable.square[3].add(num)
 		for num in row[3:6]:
-			peeker.square[4].add(num)
+			lookupTable.square[4].add(num)
 		for num in row[6:9]:
-			peeker.square[5].add(num)
+			lookupTable.square[5].add(num)
 
 	for row in grid[6:9]:
 		for num in row[:3]:
-			peeker.square[6].add(num)
+			lookupTable.square[6].add(num)
 		for num in row[3:6]:
-			peeker.square[7].add(num)
+			lookupTable.square[7].add(num)
 		for num in row[6:9]:
-			peeker.square[8].add(num)
+			lookupTable.square[8].add(num)
 
