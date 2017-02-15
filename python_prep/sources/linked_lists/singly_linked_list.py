@@ -13,9 +13,6 @@ class LinkedListIter(object):
 	def __init__(self, node):
 		self.node = node
 
-	def __iter__(self):
-		return self
-
 	def __next__(self):
 		current_node = self.node
 		
@@ -37,7 +34,7 @@ class SinglyLinkedList(object):
 	def __str__(self):
 		output = io.StringIO()
 
-		self_iter = self.iterator
+		self_iter = iter(self)
 		while True:
 			try:
 				output.write("{} ".format(next(self_iter)))
@@ -59,8 +56,7 @@ class SinglyLinkedList(object):
 		else:
 			return False
 
-	@property 
-	def iterator(self):
+	def __iter__(self):
 		""" Encapsulate access to _head when making iter. """
 		return LinkedListIter(self._head)
 
@@ -140,7 +136,20 @@ class SinglyLinkedList(object):
 	@property
 	def contains_cycle(self):
 		""" Check for equality of slow runner and fast runner (assumes unique data items). """
-		pass
+		if self._size <= 1:
+			return False
+
+		slow_runner = self._head
+		fast_runner = self._head.next
+
+		while fast_runner is not None and slow_runner.data != fast_runner.data:
+			fast_runner = fast_runner.next 
+			slow_runner = slow_runner.next 
+
+			if fast_runner is not None:
+				fast_runner = fast_runner.next
+
+		return fast_runner is not None
 
 	def _node_previous_to(self, index):
 		""" Return the node previous to the given index. """
@@ -170,9 +179,9 @@ class SinglyLinkedList(object):
 		if type(other) is list:
 			other_iter = iter(other)
 		else:
-			other_iter = other.iterator
+			other_iter = iter(other)
 
-		self_iter = self.iterator
+		self_iter = iter(self)
 
 		while True:
 			try:

@@ -55,6 +55,27 @@ class LinkedListTestCase(unittest.TestCase):
 		ssl.reverse()
 		self.assertTrue(ssl == [5, 4, 2])
 
+	def test_ssl_contains_cycle(self):
+		ssl = SinglyLinkedList()
+		ssl.insert(1, len(ssl))
+		ssl.insert(2, len(ssl))
+
+		self.assertFalse(ssl.contains_cycle)
+
+		ssl.insert(3, len(ssl))
+		ssl.insert(4, len(ssl))
+
+		self.assertFalse(ssl.contains_cycle)
+
+		ssl._head.next.next.next = ssl._head.next
+
+		self.assertTrue(ssl.contains_cycle)
+
+		ssl._head.next = ssl._head
+
+		self.assertTrue(ssl.contains_cycle)
+
+
 
 if __name__ == '__main__':
     unittests.main()
