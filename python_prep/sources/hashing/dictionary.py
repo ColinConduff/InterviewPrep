@@ -147,55 +147,19 @@ class Dictionary(object):
 
 		Amortized O(1)
 		"""
-		if self._hash_method == HashMethod.LINEAR_PROBING:
-			yield from self._find_index_using_linear_probing(key)
-		else:
-			yield from self._find_index_using_quadratic_probing(key)
-
-	def _find_index_using_linear_probing(self, key):
-		""" 
-		Use linear probing to find the index corresponding to the key.
-
-		Amortized O(1)
-
-		Best-case:
-			No collision
-			Theta(1)
-		Worst-case:
-			Collision occurs and all subsequent slots are full, except last one
-			Theta(n)
-		"""
-		hash_index = hash(key) % self._container_size
-		
-		left_half = list(range(hash_index))
-		right_half = list(range(hash_index, self._container_size))
-		
-		indices = iter(right_half + left_half)
-
-		while True:
-			try:
-				yield next(indices)
-			except StopIteration:
-				break
-
-	def _find_index_using_quadratic_probing(self, key):
-		""" 
-		Use quadratic probing to find the index corresponding to the key.
-
-		Amortized O(1)
-
-		Best-case:
-			No collision
-			Theta(1)
-		Worst-case:
-			Collision occurs and all subsequent slots are full, except last one
-			Theta(n)
-		"""
 		indices = iter(range(self._container_size))
+		hash_value = hash(key)
 
 		while True:
 			try:
-				yield (hash(key) + pow(next(indices),2)) % self._container_size
+				next_index = next(indices)
+
+				# square the index if using quadratic probing
+				if self._hash_method == HashMethod.QUADRATIC_PROBING:
+					next_index = pow(next_index,2)
+
+				yield (hash_value + next_index) % self._container_size
+				
 			except StopIteration:
 				break
 
