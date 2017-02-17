@@ -146,6 +146,13 @@ class Dictionary(object):
 		Find the index corresponding to the key.
 
 		Amortized O(1)
+
+		Best-case:
+			No collision
+			Theta(1)
+		Worst-case:
+			Collision occurs and all subsequent slots are full, except last one
+			Theta(n)
 		"""
 		indices = iter(range(self._container_size))
 		hash_value = hash(key)
@@ -159,7 +166,7 @@ class Dictionary(object):
 					next_index = pow(next_index,2)
 
 				yield (hash_value + next_index) % self._container_size
-				
+
 			except StopIteration:
 				break
 
